@@ -1,0 +1,234 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*
+ * Copyright (c) 2013 Thibaut Courouble
+ * http://www.cssflow.com
+ *
+ * Licensed under the MIT License:
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+body {
+  font: 13px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #404040;
+  background: #eeebe4;
+}
+
+.plan {
+  display: inline-block;
+  width:80%;
+  margin-top: 20px;
+  padding: 15px 25px;
+  text-align: center;
+  background: white;
+  background-clip: padding-box;
+  border: 2px solid #e5ded6;
+  border-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.plan-title {
+  margin-top: 20px;
+  margin-bottom: 12px;
+  font-size: 24px;
+  color: #333;
+}
+
+.plan-price {
+  margin-bottom: 20px;
+  padding-top: 5px;
+  line-height: 1;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+.plan-unit {
+  display: block;
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: normal;
+  margin-bottom: 10px;
+  color: #aaa;
+}
+
+.plan-features {
+  width: 100%;
+  margin: 20px auto 15px;
+  padding: 15px 0 0 0;
+  border-top: 1px solid #e5ded6;
+  text-align: left;
+}
+
+.plan-feature {
+  text-align: center;
+  line-height: 23px;
+  padding-bottom:10px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+}
+.plan-feature + .plan-feature {
+  margin-top: 5px;
+}
+
+.plan-feature-unit {
+  margin-left: 2px;
+  font-size: 16px;
+}
+
+.plan-feature-name {
+  font-size: 13px;
+  font-weight: normal;
+  color: #aaa;
+}
+
+.plan-button {
+  position: relative;
+  display: block;
+  line-height: 40px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+  background: #fd935c;
+  border-bottom: 2px solid #cf7e3b;
+  border-color: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+.plan-button:active {
+  top: 2px;
+  margin-bottom: 2px;
+  border-bottom: 0;
+}
+
+.plan-highlight-success {
+  border: 4px solid #37bbe6;
+}
+
+.plan-highlight-confirm {
+  border: 4px solid #fd935a;
+}
+
+.plan-highlight-login {
+  border: 4px solid #2fcc71;
+}
+
+.plan-highlight-success .plan-button {
+  font-size: 18px;
+  line-height: 49px;
+  background: #37bce5;
+  border-color: #37bbe6;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+.plan-highlight-confirm .plan-button {
+  font-size: 18px;
+  line-height: 49px;
+  background: #fd935c;
+  border-color: #fd935a;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.plan-highlight-login .plan-button {
+  font-size: 18px;
+  line-height: 49px;
+  background: #2fcc71;
+  border-color: #2fcc70;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.plan-highlight-login input[type="submit"] {
+  font-size: 18px;
+  line-height: 49px;
+  background: #2fcc71;
+  border-color: #2fcc70;
+  border-color: rgba(0, 0, 0, 0.15);
+  width: 100%;
+}
+
+.plan-highlight-success .plan-recommended {
+  width: 160px;
+  margin: -15px auto 15px;
+  padding-bottom: 2px;
+  line-height: 22px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.05);
+  background: #37bbe6;
+  border-radius: 0 0 4px 4px;
+}
+
+.plan-highlight-confirm .plan-recommended {
+  width: 160px;
+  margin: -15px auto 15px;
+  padding-bottom: 2px;
+  line-height: 22px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.05);
+  background: #fd935a;
+  border-radius: 0 0 4px 4px;
+}
+
+.plan-highlight-login .plan-recommended {
+  width: 160px;
+  margin: -15px auto 15px;
+  padding-bottom: 2px;
+  line-height: 22px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.05);
+  background: #2fcc71;
+  border-radius: 0 0 4px 4px;
+}
