@@ -1,5 +1,6 @@
 
 <?php
+
 class mysql {
     private $link_id;
     private $handle;
@@ -9,7 +10,7 @@ class mysql {
     //构造函数
     public function __construct() {
         $this->time = $this->microtime_float();
-        require_once("config.db.php");
+        require("config.db.php");
         $this->connect($db_config["hostname"], $db_config["username"], $db_config["password"], $db_config["database"], $db_config["pconnect"]);
         $this->is_log = $db_config["log"];
         if($this->is_log){
@@ -20,45 +21,35 @@ class mysql {
      
     //数据库连接
     public function connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect = 0,$charset='utf8') {
-        if( $pconnect==0 ) {
-            $this->link_id = @mysql_connect($dbhost, $dbuser, $dbpw, true);
-            if(!$this->link_id){
+        $this->link_id = mysqli_connect($dbhost, $dbuser, $dbpw ,$dbname);
+        if(!$this->link_id){
                 $this->halt("数据库连接失败");
             }
-        } else {
-            $this->link_id = @mysql_pconnect($dbhost, $dbuser, $dbpw);
-            if(!$this->link_id){
-                $this->halt("数据库持久连接失败");
-            }
-        }
-        if(!@mysql_select_db($dbname,$this->link_id)) {
-            $this->halt('数据库选择失败');
-        }
-        @mysql_query("set names ".$charset);
+        @mysqli_query($this->link_id,"set names ".$charset);
     }
      
     //查询 
     public function query($sql) {
         $this->write_log("查询 ".$sql);
-        $query = mysql_query($sql,$this->link_id);
+        $query = mysqli_query($this->link_id,$sql);
         if(!$query) $this->halt('Query Error: ' . $sql);
         return $query;
     }
      
     //获取一条记录（MYSQL_ASSOC，MYSQL_NUM，MYSQL_BOTH）              
-    public function get_one($sql,$result_type = MYSQL_ASSOC) {
+    public function get_one($sql,$result_type = MYSQLI_ASSOC) {
         $query = $this->query($sql);
-        $rt =& mysql_fetch_array($query,$result_type);
+        $rt = mysqli_fetch_array($query,$result_type);
         $this->write_log("获取一条记录 ".$sql);
         return $rt;
     }
  
     //获取全部记录
-    public function get_all($sql,$result_type = MYSQL_ASSOC) {
+    public function get_all($sql,$result_type = MYSQLI_ASSOC) {
         $query = $this->query($sql);
         $i = 0;
         $rt = array();
-        while($row =& mysql_fetch_array($query,$result_type)) {
+        while($row = mysqli_fetch_array($query,$result_type)) {
             $rt[$i]=$row;
             $i++;
         }
@@ -115,15 +106,15 @@ class mysql {
     }
  
     //返回结果集
-    public function fetch_array($query, $result_type = MYSQL_ASSOC){
+    public function fetch_array($query, $result_type = MYSQLI_ASSOC){
         $this->write_log("返回结果集");
-        return mysql_fetch_array($query, $result_type);
+        return mysqli_fetch_array($query, $result_type);
     }
  
     //获取记录条数
     public function num_rows($results) {
         if(!is_bool($results)) {
-            $num = mysql_num_rows($results);
+            $num = mysqli_num_rows($results);
             $this->write_log("获取的记录条数为".$num);
             return $num;
         } else {
@@ -136,7 +127,7 @@ class mysql {
         $void = func_get_args();
         foreach($void as $query) {
             if(is_resource($query) && get_resource_type($query) === 'mysql result') {
-                return mysql_free_result($query);
+                return mysqli_free_result($query);
             }
         }
         $this->write_log("释放结果集");
@@ -144,7 +135,7 @@ class mysql {
  
     //获取最后插入的id
     public function insert_id() {
-        $id = mysql_insert_id($this->link_id);
+        $id = mysqli_insert_id($this->link_id);
         $this->write_log("最后插入的id为".$id);
         return $id;
     }
@@ -152,7 +143,7 @@ class mysql {
     //关闭数据库连接
     protected function close() {
         $this->write_log("已关闭数据库连接");
-        return @mysql_close($this->link_id);
+        return @mysqli_close($this->link_id);
     }
  
     //错误提示
