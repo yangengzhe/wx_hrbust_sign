@@ -9,6 +9,9 @@
   require_once('./index.php');
 
   class MyWechat extends Wechat {
+    private $sign = true;//true允许 false不允许管理权限
+    private $key = 'hrbust';//秘钥
+    private $emun_role = array('0' => '管理员','2' => '教师','3'=>'审核');
 
     /**
      * 用户关注时触发，回复「欢迎关注」
@@ -113,9 +116,20 @@
             $res =wx_fun($user,$parm);
             if($res == 31)
               $result = '没有权限！';
-            else {
+            else if(!is_numeric($res)){
               $result = $res;
             }
+          }else if($this->sign && is_array($str_array) && $str_array[0] == $this->key){
+            $role = $str_array[1];
+            $des_role = isset($this->emun_role[$role])?$this->emun_role[$role]:-1;
+            if($des_role != -1){
+              $res = wx_fun($user,'add_admin',$role);
+              if($res == 1)
+                $result = $des_role.'设置成功！';
+              else 
+                $result = '设置失败';
+            }else
+              $result = '权限命令错误';
           }
           break;
       }

@@ -50,9 +50,15 @@
 	//11待确认 12已确认 13 完成
 	//21审核成功 22状态不对 23用户不存在
 	//31无权限
-	function wx_fun($user,$parm=null){
+	function wx_fun($user,$parm=null,$role=1){
 		$core = new core();
 		$res = $core->check_user($user);
+
+		if($parm == 'add_admin'){
+			$res= $core->add_admin($res,$user,$role);
+			return $res;
+		}
+
 		switch($res){
 			case -1://新同学
 				if(is_array($parm)){

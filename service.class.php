@@ -40,6 +40,10 @@ class service{
 	public function update_user($no,$state){
 		$this->_db->query('update user set state='.$state.' where no=\''.$no.'\'');
 	}
+	//更新user
+	public function update_user_role($user,$role){
+		$this->_db->query('update user set role='.$role.' where user=\''.$user.'\'');
+	}
 
 	//获取学生信息 -1不存在学生 数组是同学
 	public function get_student($name,$identity){

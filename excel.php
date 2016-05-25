@@ -18,7 +18,7 @@ header("Content-Disposition:attachment;filename=hrbust_software.xls");
 require_once ('mysql.class.php'); 
 $db = new mysql();
 
-$res = $db->get_all('select * from students , log where `students`.`no` = `log`.`no`;');
+$res = $db->get_all('select name,class,students.no AS no,apartment,room,identity,state,gmt_register,gmt_confirm,gmt_complete from students LEFT JOIN log ON `students`.`no` = `log`.`no`;');
 if(empty($res)) return -1;
 
 
@@ -80,9 +80,18 @@ if(empty($res)) return -1;
                          echo '<td class=xl2216681 nowrap>已报到</td>';
                     else
                          echo '<td class=xl2216681 nowrap>未报到</td>';
-                    echo '<td class=xl2216681 nowrap>'.date("Y-m-d H:i:s", $res[$i]['gmt_register']).'</td>';
-                    echo '<td class=xl2216681 nowrap>'.date("Y-m-d H:i:s", $res[$i]['gmt_confirm']).'</td>';
-                    echo '<td class=xl2216681 nowrap>'.date("Y-m-d H:i:s", $res[$i]['gmt_complete']).'</td>';
+                    if($res[$i]['gmt_register'] !='' && $res[$i]['gmt_register']!=null)
+                      echo '<td class=xl2216681 nowrap>'.date("Y-m-d H:i:s", $res[$i]['gmt_register']).'</td>';
+                    else
+                      echo '<td class=xl2216681 nowrap>'.'</td>';
+                    if($res[$i]['gmt_confirm'] !='' && $res[$i]['gmt_confirm']!=null)
+                      echo '<td class=xl2216681 nowrap>'.date("Y-m-d H:i:s", $res[$i]['gmt_confirm']).'</td>';
+                    else
+                      echo '<td class=xl2216681 nowrap>'.'</td>';
+                    if($res[$i]['gmt_complete'] !='' && $res[$i]['gmt_complete']!=null)
+                      echo '<td class=xl2216681 nowrap>'.date("Y-m-d H:i:s", $res[$i]['gmt_complete']).'</td>';
+                    else
+                      echo '<td class=xl2216681 nowrap>'.'</td>';
                     echo '</tr>';
                }
              ?>

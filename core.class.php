@@ -13,7 +13,13 @@ class core{
 		// $this->_service->update_log_complete('s');
 		// echo $this->_service->count_log(1);
 	}
-
+	public function add_admin($res,$user,$role){
+		if($res == -1)
+			$this->_service->add_user($user,$role);
+		else
+			$this->_service->update_user_role($user,$role);
+		return 1;
+	}
 	//-1新同学 1已存在同学 >1非同学
 	public function check_user($user){
 		$result = $this->_service->check_user($user);
